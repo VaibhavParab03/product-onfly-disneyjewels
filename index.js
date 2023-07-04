@@ -17,6 +17,12 @@ var Shopify = new shopifyAPI({
   access_token: process.env.ACCESS_TOKEN, // Your API password
 });
 
+var Shopify2 = new shopifyAPI({
+  shop: process.env.SHOP2, // MYSHOP.myshopify.com
+  shopify_api_key: process.env.SHOPIFY_API_KEY2, // Your API key
+  access_token: process.env.ACCESS_TOKEN2, // Your API password
+});
+
 app.get("/", (req, res) => {
   res.send({ msg: "Welcome to Homepage" });
 });
@@ -24,6 +30,21 @@ app.get("/", (req, res) => {
 app.post("/api/create-product", async (req, res) => {
   const post_data = req.body;
   await Shopify.post(
+    "/admin/products.json",
+    post_data,
+    function (err, data, headers) {
+      if (err) {
+        res.send(err);
+        return false;
+      }
+      res.send(data);
+    }
+  );
+});
+
+app.post("/api/create-mfu-product", async (req, res) => {
+  const post_data = req.body;
+  await Shopify2.post(
     "/admin/products.json",
     post_data,
     function (err, data, headers) {
