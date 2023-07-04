@@ -11,12 +11,14 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 
+// for disneyJewels
 var Shopify = new shopifyAPI({
   shop: process.env.SHOP, // MYSHOP.myshopify.com
   shopify_api_key: process.env.SHOPIFY_API_KEY, // Your API key
   access_token: process.env.ACCESS_TOKEN, // Your API password
 });
 
+// for mfu
 var Shopify2 = new shopifyAPI({
   shop: process.env.SHOP2, // MYSHOP.myshopify.com
   shopify_api_key: process.env.SHOPIFY_API_KEY2, // Your API key
